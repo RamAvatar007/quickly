@@ -30,13 +30,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
           child: Column(
             children: [
-              SizedBox(height: mq.height * .27),
+              SizedBox(height: mq.height * .25),
               Image.asset(logoImage),
               const Expanded(child: SizedBox()),
               Card(
                 shadowColor: shadowColor,
                 child: Container(
-                  height: mq.height * .38,
+                 // height: mq.height * .38,
                   width: mq.width * 1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -153,7 +153,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
               SizedBox(
-                height: mq.height * .04,
+                height: mq.height * .03,
               )
             ],
           ),

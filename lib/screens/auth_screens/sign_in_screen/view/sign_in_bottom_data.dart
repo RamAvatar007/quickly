@@ -152,7 +152,7 @@ class SignInBottomData extends StatelessWidget {
             },
         ),
         SizedBox(
-          height: mq.height * .02,
+          height: mq.height * .022,
         ),
         InkWell(
             child: CommonText(

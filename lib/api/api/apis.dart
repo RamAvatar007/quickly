@@ -50,7 +50,4 @@ class Apis {
   static const googleApiKey = 'AIzaSyCrfZW4Yn9i6Fk9zq_YEsCwW-sbdXyVCzs';
   static const googleSearchApi = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
   static const googleSearchDetailApi = 'https://maps.googleapis.com/maps/api/place/details/json';
-
-
- 
 }

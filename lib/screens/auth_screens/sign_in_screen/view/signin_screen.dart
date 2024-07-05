@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:quickly_design_one/constant/app_color.dart';
 import 'package:quickly_design_one/constant/app_image.dart';
@@ -8,6 +11,10 @@ import 'package:quickly_design_one/constant/common_text_form_field.dart';
 import 'package:quickly_design_one/constant/font_style.dart';
 import 'package:quickly_design_one/main.dart';
 import 'package:quickly_design_one/screens/auth_screens/sign_in_screen/view/sign_in_bottom_data.dart';
+
+import '../../otp_screen/otp_screen.dart';
+import 'package:http/http.dart' as http;
+
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -84,17 +91,18 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: mq.height * .03,
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async  {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                          const SnackBar(content:  Text('Processing Data')),
                       );
                     }
-                  /*  Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const OtpScreen(),
-                        ));*/
+                    login() ;
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const OtpScreen(),
+                    //     ));
                   },
                   child: const CommonButton(
                     text: 'CONTINUE',
@@ -108,4 +116,45 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+
+  Future<void> login() async {
+    var body = {
+      "country_code": "91",
+      "email": "naresh@yopmail.com",
+      "password": "Test@1234",
+      "type": "Customer"
+    } ;
+
+     Map<String, String> _headers = {
+      "Content-Type": "application/json"
+    };
+    try {
+      var response = await http.post(Uri.parse("https://quicklyom.com/api/app/auth/login"), body: jsonEncode(body), headers: _headers);
+
+      // final validatedResult = validateResponse(response, showMessage, redMessage);
+      // log("validated Res : ${}");
+      // if (validatedResult == 'jwt expired') {
+      //   // sharedsp?.signOut(
+      //   //     NavigationService.instance.navigationKey.currentContext!);
+      // }
+      // return validatedResult;
+
+      print("RESS ============ ${response.body}") ; 
+
+    } catch (err, stack ) {
+      log("error ====> $err");
+      log("Stack Error : $stack");
+
+      String errorMessage = err.toString();
+      log("ERRR =======> $errorMessage");
+
+      if (errorMessage.startsWith("ClientException with SocketException: Connection timed out")) {
+        // return ResponseHelper(body, "Connection Time Out Error!", "", checkStatus(false));
+      } else {
+        // return ResponseHelper(body, errorMessage, "", checkStatus(false));
+      }
+    }
+
+  }
+
 }

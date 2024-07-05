@@ -78,33 +78,41 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
                 SizedBox(
                   height: mq.height * .07,
                 ),
-                 Form(
-                   key: _formKey,
-                   child: CommonTextFormField(
-                     obscureText: isVisible,
+                Form(
+                  key: _formKey,
+                  child: CommonTextFormField(
+                    obscureText: isVisible,
                     validatorText: "Please Enter Password",
                     hintText: "*****************",
                     suffixIcon: InkWell(
-                        onTap: (){
+                        onTap: () {
                           setState(() {
                             isVisible = !isVisible;
                           });
                         },
-                        child: Icon( isVisible ? Icons.visibility_off_outlined : Icons.visibility_outlined,color: brown9fColor,)),
-                                   ),
-                 ),
+                        child: Icon(
+                          isVisible
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: brown9fColor,
+                        )),
+                  ),
+                ),
                 SizedBox(
                   height: mq.height * .03,
                 ),
                 GestureDetector(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
                     }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignInScreen(),
+                        ));
                   },
                   child: const CommonButton(
                     text: 'SIGN IN',
@@ -114,8 +122,12 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
                   height: mq.height * .025,
                 ),
                 InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>const SignInScreen(),));
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignInScreen(),
+                        ));
                   },
                   child: CommonText(
                       text: "Forgot Password?",

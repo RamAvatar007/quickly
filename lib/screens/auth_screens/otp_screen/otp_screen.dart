@@ -105,7 +105,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         const SnackBar(content: Text('Processing Data')),
                       );
                     }
-                   // Navigator.push(context, MaterialPageRoute(builder: (context) =>const SignInPasswordScreen(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>const SignInPasswordScreen(),));
                   },
                   child: const CommonButton(
                     text: 'CONTINUE',

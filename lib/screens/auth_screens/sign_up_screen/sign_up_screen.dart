@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:quickly_design_one/api_handler/api_constant.dart';
 import 'package:quickly_design_one/constant/app_color.dart';
 import 'package:quickly_design_one/constant/app_image.dart';
 import 'package:quickly_design_one/constant/common_bg_container.dart';
@@ -10,7 +11,7 @@ import 'package:quickly_design_one/main.dart';
 import 'package:quickly_design_one/screens/auth_screens/sign_in_screen/view/signin_screen.dart';
 
 import '../../../constant/common_rich_text_league_spartan.dart';
-import 'sign_up_text_field.dart';
+import '../../../constant/common_text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -20,6 +21,11 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  ApiMethod apiMethod = ApiMethod();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool checkBox1 = false;
   bool checkBox2 = false;
 
@@ -66,7 +72,84 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: mq.height * .008,
                   ),
-                  const SignUpTextField(),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: CommonText(
+                        text: "Name",
+                        textAlign: TextAlign.left,
+                        fontSize: fo15,
+                        fontWeight: fBoldFont,
+                        fontColor: blackColor),
+                  ),
+                  SizedBox(
+                    height: mq.height * .008,
+                  ),
+                  CommonTextFormField(
+                    controller: nameController,
+                    hintText: "Ex. Eman Fathima",
+                    validatorText: "Please Enter Name",
+                  ),
+                  SizedBox(
+                    height: mq.height * .025,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: CommonText(
+                        text: "Email",
+                        textAlign: TextAlign.left,
+                        fontSize: fo15,
+                        fontWeight: fBoldFont,
+                        fontColor: blackColor),
+                  ),
+                  SizedBox(
+                    height: mq.height * .008,
+                  ),
+                  CommonTextFormField(
+                    controller: emailController,
+                    hintText: "example@domain.com",
+                    validatorText: "Please Enter Email/name",
+                  ),
+                  SizedBox(
+                    height: mq.height * .025,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: CommonText(
+                        text: "Phone",
+                        textAlign: TextAlign.left,
+                        fontSize: fo15,
+                        fontWeight: fBoldFont,
+                        fontColor: blackColor),
+                  ),
+                  SizedBox(
+                    height: mq.height * .008,
+                  ),
+                  CommonTextFormField(
+                    controller: phoneController,
+                    hintText: "8955773345",
+                    validatorText: "Please Enter Phone Number",
+                  ),
+                  SizedBox(
+                    height: mq.height * .025,
+                  ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: CommonText(
+                        text: "Password",
+                        textAlign: TextAlign.left,
+                        fontSize: fo15,
+                        fontWeight: fBoldFont,
+                        fontColor: blackColor),
+                  ),
+                  SizedBox(
+                    height: mq.height * .008,
+                  ),
+                  CommonTextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    hintText: "************",
+                    validatorText: "Please Enter Conform Password",
+                  ),
                   Row(
                     children: [
                       Transform.translate(
@@ -135,17 +218,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: GestureDetector(
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
+                          apiMethod
+                              .fetchSignUpData(
+                                  nameController.text.toString(),
+                                  emailController.text.toString(),
+                                  phoneController.text.toString(),
+                                  passwordController.text.toString())
+                              ;
                         }
-                        /* Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignInScreen(),
-                            ));*/
                       },
                       child: const CommonButton(
                         text: 'SIGN UP',
@@ -179,7 +259,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontWeight: f400,
                           fontColor: brown9fColor)),
                   SizedBox(
-                    height: mq.height * .04,
+                    height: mq.height * .03,
                   ),
                 ],
               ),
