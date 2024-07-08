@@ -7,6 +7,7 @@ import 'package:quickly_design_one/constant/common_button.dart';
 import 'package:quickly_design_one/constant/common_rich_text.dart';
 import 'package:quickly_design_one/constant/common_text.dart';
 import 'package:quickly_design_one/constant/font_style.dart';
+import 'package:quickly_design_one/helper/storage_helper.dart';
 import 'package:quickly_design_one/main.dart';
 import 'package:quickly_design_one/screens/auth_screens/onboarding_screen/onbording_screen.dart';
 
@@ -21,6 +22,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   String? language = "English";
   @override
   Widget build(BuildContext context) {
+    print(StorageHelper().getUserEmail());
+    print(StorageHelper().getUserPhone());
     mq = MediaQuery.of(context).size;
     return Scaffold(
       body: CommonBgContainer(

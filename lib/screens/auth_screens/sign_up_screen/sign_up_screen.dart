@@ -1,17 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:quickly_design_one/api_handler/api_constant.dart';
+import 'package:provider/provider.dart';
 import 'package:quickly_design_one/constant/app_color.dart';
 import 'package:quickly_design_one/constant/app_image.dart';
 import 'package:quickly_design_one/constant/common_bg_container.dart';
 import 'package:quickly_design_one/constant/common_button.dart';
+import 'package:quickly_design_one/constant/common_rich_text_league_spartan.dart';
 import 'package:quickly_design_one/constant/common_text.dart';
+import 'package:quickly_design_one/constant/common_text_form_field.dart';
 import 'package:quickly_design_one/constant/font_style.dart';
 import 'package:quickly_design_one/main.dart';
 import 'package:quickly_design_one/screens/auth_screens/sign_in_screen/view/signin_screen.dart';
-
-import '../../../constant/common_rich_text_league_spartan.dart';
-import '../../../constant/common_text_form_field.dart';
+import 'package:quickly_design_one/screens/auth_screens/sign_up_screen/sign_up_provider/sign_up_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -21,29 +21,18 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  ApiMethod apiMethod = ApiMethod();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool checkBox1 = false;
-  bool checkBox2 = false;
-
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: CommonBgContainer(
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: mq.width * .04,
-                right: mq.width * .04,
-                top: mq.height * .07),
-            child: Form(
-              key: _formKey,
+    return Consumer<SignUpProvider>(builder: (context, value, child) {
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: CommonBgContainer(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: mq.width * .04,
+                  right: mq.width * .04,
+                  top: mq.height * .07),
               child: Column(
                 children: [
                   SizedBox(
@@ -85,9 +74,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: mq.height * .008,
                   ),
                   CommonTextFormField(
-                    controller: nameController,
+                    controller: value.nameController,
                     hintText: "Ex. Eman Fathima",
-                    validatorText: "Please Enter Name",
                   ),
                   SizedBox(
                     height: mq.height * .025,
@@ -105,9 +93,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: mq.height * .008,
                   ),
                   CommonTextFormField(
-                    controller: emailController,
+                    controller: value.emailController,
                     hintText: "example@domain.com",
-                    validatorText: "Please Enter Email/name",
                   ),
                   SizedBox(
                     height: mq.height * .025,
@@ -125,9 +112,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: mq.height * .008,
                   ),
                   CommonTextFormField(
-                    controller: phoneController,
+                    controller: value.phoneController,
                     hintText: "8955773345",
-                    validatorText: "Please Enter Phone Number",
                   ),
                   SizedBox(
                     height: mq.height * .025,
@@ -145,10 +131,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: mq.height * .008,
                   ),
                   CommonTextFormField(
-                    controller: passwordController,
+                    controller: value.passwordController,
                     obscureText: true,
                     hintText: "************",
-                    validatorText: "Please Enter Conform Password",
                   ),
                   Row(
                     children: [
@@ -161,11 +146,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             activeColor: primaryColor,
                             checkColor: whiteColor,
-                            value: checkBox2,
-                            onChanged: (value) {
-                              setState(() {
-                                checkBox2 = value!;
-                              });
+                            value: value.checkBox1,
+                            onChanged: (val) {
+                              value.updateCheckBox1(val!);
                             }),
                       ),
                       Transform.translate(
@@ -190,16 +173,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Transform.translate(
                           offset: const Offset(-10, 0),
                           child: Checkbox(
-                              value: checkBox1,
+                              value: value.checkBox2,
                               side: WidgetStateBorderSide.resolveWith(
                                 (states) =>
                                     BorderSide(width: 1.0, color: primaryColor),
                               ),
                               activeColor: primaryColor,
                               onChanged: (newValue) {
-                                setState(() {
-                                  checkBox1 = newValue!;
-                                });
+                               value.updateCheckBox1(newValue!);
                               }),
                         ),
                         Transform.translate(
@@ -217,15 +198,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     offset: const Offset(0, -15),
                     child: GestureDetector(
                       onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          apiMethod
-                              .fetchSignUpData(
-                                  nameController.text.toString(),
-                                  emailController.text.toString(),
-                                  phoneController.text.toString(),
-                                  passwordController.text.toString())
-                              ;
-                        }
+                        value.signUpPostApiData(context);
                       },
                       child: const CommonButton(
                         text: 'SIGN UP',
@@ -266,7 +239,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
