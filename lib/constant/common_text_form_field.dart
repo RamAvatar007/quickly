@@ -6,6 +6,7 @@ import 'font_style.dart';
 class CommonTextFormField extends StatelessWidget {
   final String? hintText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final bool? obscureText;
   final dynamic controller;
   final String? validatorText;
@@ -15,7 +16,7 @@ class CommonTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText,
     this.controller,
-    this.validatorText,
+    this.validatorText, this.prefixIcon,
   });
 
   @override
@@ -33,6 +34,7 @@ class CommonTextFormField extends StatelessWidget {
       },
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: whiteColor),
             borderRadius: BorderRadius.circular(8)),

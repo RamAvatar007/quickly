@@ -12,14 +12,14 @@ import 'package:quickly_design_one/screens/auth_screens/sign_in_password_screen/
 import 'package:quickly_design_one/screens/auth_screens/sign_in_screen/view/signin_screen.dart';
 
 class SignInPasswordScreen extends StatefulWidget {
-  const SignInPasswordScreen({super.key});
+  final String email;
+  const SignInPasswordScreen({super.key, required this.email});
 
   @override
   State<SignInPasswordScreen> createState() => _SignInPasswordScreenState();
 }
 
 class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
-
   bool isVisible = true;
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CommonText(
-                          text: "+968 7216 2709   ",
+                          text: widget.email,
                           fontSize: fo15,
                           fontWeight: fBoldFont,
                           fontColor: blackColor),
@@ -105,7 +105,11 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      value.loginWithPasswordPostApiData(context);
+                     if(widget.email.contains("@")){
+                       value.loginWithPasswordEmailPostApiData(context);
+                     }else{
+                       value.loginWithPasswordPhonePostApiData(context);
+                     }
                     },
                     child: const CommonButton(
                       text: 'SIGN IN',
@@ -115,13 +119,7 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
                     height: mq.height * .025,
                   ),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignInScreen(),
-                          ));
-                    },
+                    onTap: () {},
                     child: CommonText(
                         text: "Forgot Password?",
                         fontSize: fo12,
@@ -156,6 +154,13 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
                     height: mq.height * .05,
                   ),
                   InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignInScreen(),
+                          ));
+                    },
                     child: Container(
                       width: mq.width * .6,
                       height: mq.height * .05,

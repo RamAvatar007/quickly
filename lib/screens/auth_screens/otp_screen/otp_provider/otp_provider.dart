@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:quickly_design_one/helper/storage_helper.dart';
 import 'package:quickly_design_one/network_manager/rest_client.dart';
-import 'package:quickly_design_one/screens/screen/home_screen.dart';
-import 'package:quickly_design_one/utils/toast_message.dart';
+import 'package:quickly_design_one/screens/screen/all_bottom_bar_tab_screens/bottom_bar_tabs_screen/bottom_bar_tab_screen.dart';
 
 class OtpProvider with ChangeNotifier {
   TextEditingController otpController = TextEditingController();
@@ -21,10 +21,12 @@ class OtpProvider with ChangeNotifier {
     };
     RestClient.fetchVerifyOtpPostApi(params).then((value) {
       StorageHelper().setUserBearerToken(value['data']['token']);
+      StorageHelper().setUserPhone(value['data']['user']['mobile_number']);
+      StorageHelper().setUserEmail(value['data']['user']['email']);
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const BottomBarTabScreen(),
           ));
       isLoading = false;
       notifyListeners();
@@ -34,24 +36,27 @@ class OtpProvider with ChangeNotifier {
       notifyListeners();
     });
   }
+  //// Resend Otp Apply here!!!
 
-  reSendOtpPostApiData() {
+  mailResendOtp() {
     isLoading = true;
     notifyListeners();
-    Map params = {
-      "login_type": "mobile_number",
-      "country_code": "91",
-      "mobile_number": StorageHelper().getUserPhone(),
-      "type": "Customer"
-    };
-    RestClient.fetchResendOtpPostApi(params).then((value) {
-      isLoading = false;
-      notifyListeners();
-      toastMessage(value['message']);
-    }).onError((error, stackTrace) {
-      log("Error : $error");
+    Map params = {"email": StorageHelper().getUserEmail().toString(), "login_type": "email", "country_code": "91", "type": "Customer"};
+    RestClient.fetchSendOtpPostApi(params).then((value) {
       isLoading = false;
       notifyListeners();
     });
+    notifyListeners();
+  }
+
+  phoneResendOtp() {
+    isLoading = true;
+    notifyListeners();
+    Map params = {"mobile_number": StorageHelper().getUserPhone().toString(), "login_type": "mobile_number", "country_code": "91", "type": "Customer"};
+    RestClient.fetchSendOtpPostApi(params).then((value) {
+      isLoading = false;
+      notifyListeners();
+    });
+    notifyListeners();
   }
 }

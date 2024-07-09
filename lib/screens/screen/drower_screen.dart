@@ -19,7 +19,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     mq = MediaQuery.of(context).size;
     return Scaffold(
       body: CommonBgContainer2(
-        child: Padding(
+        child:
+        Padding(
           padding: EdgeInsets.only(left: mq.width *.06,right: mq.width *.06,top: mq.height * .07),
           child: Column(
             children: [

@@ -4,10 +4,8 @@ import 'package:quickly_design_one/constant/app_image.dart';
 import 'package:quickly_design_one/constant/common_bg_container.dart';
 import 'package:quickly_design_one/constant/common_text.dart';
 import 'package:quickly_design_one/constant/font_style.dart';
-import 'package:quickly_design_one/helper/storage_helper.dart';
 import 'package:quickly_design_one/main.dart';
 import 'package:quickly_design_one/screens/auth_screens/welcome_screen/welcome_screen.dart';
-import 'package:quickly_design_one/screens/screen/home_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {

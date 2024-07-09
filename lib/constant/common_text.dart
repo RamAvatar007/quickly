@@ -7,12 +7,13 @@ class CommonText extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final dynamic textAlign;
+  final dynamic decoration;
   const CommonText(
       {super.key,
       required this.text,
       required this.fontSize,
       required this.fontWeight,
-      required this.fontColor,  this.textAlign});
+      required this.fontColor,  this.textAlign, this.decoration});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class CommonText extends StatelessWidget {
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: fontColor,
-          decoration: TextDecoration.none),
+          decoration: decoration ?? TextDecoration.none),
     );
   }
 }

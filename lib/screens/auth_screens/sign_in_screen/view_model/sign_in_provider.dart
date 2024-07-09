@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quickly_design_one/helper/storage_helper.dart';
@@ -16,14 +15,13 @@ class MailSendOtpProvider with ChangeNotifier {
     if (emailController.text.contains('@')) {
       Map params = {
         "email": emailController.text,
-        "mobile_number": StorageHelper().getUserPhone().toString(),
         "login_type": "email",
         "country_code": "91",
         "type": "Customer"
       };
 
       RestClient.fetchSendOtpPostApi(params).then((value) {
-        log("$value");
+        StorageHelper().setUserEmail(emailController.text.toString());
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -40,14 +38,13 @@ class MailSendOtpProvider with ChangeNotifier {
       });
     } else {
       Map params = {
-        "email": StorageHelper().getUserEmail().toString(),
         "mobile_number": emailController.text,
         "login_type": "mobile_number",
         "country_code": "91",
         "type": "Customer"
       };
       RestClient.fetchSendOtpPostApi(params).then((value) {
-        log("$value");
+        StorageHelper().setUserPhone(emailController.text.toString());
         Navigator.push(
             context,
             MaterialPageRoute(
