@@ -59,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
                 SizedBox(
                   height: mq.height *.0012,
                 ),
-                CommonText(text: "OMR 99,241‬", fontSize: fo20, fontWeight: fBoldFont, fontColor: primaryColor),
+                CommonText(text: "OMR 99 3376", fontSize: fo20, fontWeight: fBoldFont, fontColor: primaryColor),
               ],
             ),
             Flexible(child: Container()),
