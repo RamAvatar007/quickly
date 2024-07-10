@@ -1,25 +1,22 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quickly_design_one/constant/app_color.dart';
 import 'package:quickly_design_one/constant/app_image.dart';
 import 'package:quickly_design_one/constant/common_bg_container.dart';
 import 'package:quickly_design_one/constant/common_button.dart';
-import 'package:quickly_design_one/constant/common_rich_text_league_spartan.dart';
 import 'package:quickly_design_one/constant/common_text.dart';
 import 'package:quickly_design_one/constant/common_text_form_field.dart';
 import 'package:quickly_design_one/constant/font_style.dart';
 import 'package:quickly_design_one/constant/mq_constant.dart';
 import 'package:quickly_design_one/main.dart';
-import 'package:quickly_design_one/screens/auth_screens/sign_up_screen/sign_up_screen.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+class VerifyAndResetPasswordScreen extends StatefulWidget {
+  const VerifyAndResetPasswordScreen({super.key});
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<VerifyAndResetPasswordScreen> createState() => _VerifyAndResetPasswordScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _VerifyAndResetPasswordScreenState extends State<VerifyAndResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
@@ -95,36 +92,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         fontSize: fo12,
                         fontWeight: f400,
                         fontColor: black27Color),
-                  ),
-                  Flexible(child: Container()),
-                  CommonRichTextLeagueSpartan(
-                    text1: "Don't Have An Account?",
-                    text2: "  Sign Up",
-                    fontSize: fo12,
-                    fontWeight: f400,
-                    color1: black57Color,
-                    color2: primaryColor,
-                    onTap: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignUpScreen(),
-                            ));
-                      },
-                  ),
-                  SizedBox(
-                    height: mqHeight15,
-                  ),
-                  InkWell(
-                    child: CommonText(
-                        text: "Continue as Guest",
-                        fontSize: fo12,
-                        fontWeight: f400,
-                        fontColor: brown9fColor),
-                  ),
-                  SizedBox(
-                    height: mq.height * .085,
                   ),
                 ],
               ),

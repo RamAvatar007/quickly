@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: (){
                Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back_ios_new_outlined)),
+              child: const Icon(Icons.arrow_back_ios_new_outlined)),
           backgroundColor: whiteColor,
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
