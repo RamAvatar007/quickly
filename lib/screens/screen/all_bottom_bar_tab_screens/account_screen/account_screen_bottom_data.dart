@@ -3,6 +3,7 @@ import 'package:quickly_design_one/constant/app_color.dart';
 import 'package:quickly_design_one/constant/common_text.dart';
 import 'package:quickly_design_one/constant/font_style.dart';
 import 'package:quickly_design_one/main.dart';
+import 'package:quickly_design_one/screens/screen/profile_screen/profile_screen.dart';
 
 class AccountScreenBottomData extends StatefulWidget {
   const AccountScreenBottomData({super.key});
@@ -14,11 +15,16 @@ class AccountScreenBottomData extends StatefulWidget {
 class _AccountScreenBottomDataState extends State<AccountScreenBottomData> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return  Column(
       children: [
-        AccountSetting(
-          text: "Your Profile",
-          icon: Icon(Icons.person_outline_outlined),
+        InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>const ProfileScreen(),));
+          },
+          child: AccountSetting(
+            text: "Your Profile",
+            icon: Icon(Icons.person_outline_outlined),
+          ),
         ),
         AccountSetting(
           text: "Notifications",

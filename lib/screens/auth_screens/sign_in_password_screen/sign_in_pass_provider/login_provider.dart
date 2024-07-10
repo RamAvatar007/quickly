@@ -16,6 +16,8 @@ class LoginWithPasswordProvider with ChangeNotifier {
       StorageHelper().setUserBearerToken(value['data']['token']);
       StorageHelper().setUserPhone(value['data']['user']['mobile_number']);
       StorageHelper().setUserEmail(value['data']['user']['email']);
+      StorageHelper().setUserName(value['data']['user']['name']);
+      // StorageHelper().setUserEmail(value['data']['user']['email']);
       isLoading = false;
       notifyListeners();
       Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBarTabScreen()));
@@ -36,6 +38,8 @@ class LoginWithPasswordProvider with ChangeNotifier {
       StorageHelper().setUserBearerToken(value['data']['token']);
       StorageHelper().setUserPhone(value['data']['user']['mobile_number']);
       StorageHelper().setUserEmail(value['data']['user']['email']);
+      StorageHelper().setUserName(value['data']['user']['name']);
+      // StorageHelper().setUserEmail(value['data']['user']['email']);
       isLoading = false;
       notifyListeners();
       Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomBarTabScreen()));

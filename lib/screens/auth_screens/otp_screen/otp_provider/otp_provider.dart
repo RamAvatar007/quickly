@@ -23,6 +23,8 @@ class OtpProvider with ChangeNotifier {
       StorageHelper().setUserBearerToken(value['data']['token']);
       StorageHelper().setUserPhone(value['data']['user']['mobile_number']);
       StorageHelper().setUserEmail(value['data']['user']['email']);
+      StorageHelper().setUserName(value['data']['user']['name']);
+     // StorageHelper().setUserEmail(value['data']['user']['email']);
       Navigator.push(
           context,
           MaterialPageRoute(

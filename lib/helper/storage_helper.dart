@@ -28,11 +28,11 @@ class StorageHelper {
   }
 
   void setUserEmail(String value) {
-    sp.setString("user_name", value);
+    sp.setString("user_email", value);
   }
 
   String getUserEmail() {
-    return sp.getString("user_name") ?? " ";
+    return sp.getString("user_email") ?? " ";
   }
 
   void setUserPhone(String value) {
@@ -41,5 +41,21 @@ class StorageHelper {
 
   String getUserPhone() {
     return sp.getString("user_phone") ?? " ";
+  }
+
+  void setUserName(String value) {
+    sp.setString("user_name", value);
+  }
+
+  String getUserName() {
+    return sp.getString("user_name") ?? " ";
+  }
+
+  void setUserPassword(String value) {
+    sp.setString("user_password", value);
+  }
+
+  String getUserPassword() {
+    return sp.getString("user_password") ?? " ";
   }
 }

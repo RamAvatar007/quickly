@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:quickly_design_one/helper/storage_helper.dart';
 import 'package:quickly_design_one/screens/auth_screens/sign_in_screen/view_model/sign_in_provider.dart';
 import 'package:quickly_design_one/screens/auth_screens/sign_up_screen/sign_up_provider/sign_up_provider.dart';
-import 'package:quickly_design_one/screens/screen/profile_screen/profile_screen.dart';
+import 'package:quickly_design_one/screens/auth_screens/splash_screen/splash_screen.dart';
 import 'screens/auth_screens/otp_screen/otp_provider/otp_provider.dart';
 import 'screens/auth_screens/sign_in_password_screen/sign_in_pass_provider/login_provider.dart';
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ProfileScreen(),
+      home: const SplashScreen(),
     );
   }
 }
